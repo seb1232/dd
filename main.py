@@ -187,68 +187,52 @@ st.markdown("""
         width: 100%;
         height: 100%;
         overflow: hidden;
-        z-index: -2;
+        z-index: -1;
         pointer-events: none;
     }
 
     .floating-image {
         position: absolute;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        opacity: 0.3;
-        animation: imageLoop 20s infinite linear;
-        background-size: cover;
-        background-position: center;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        opacity: 0.6;
+        animation: standardLoop 15s infinite linear;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
-    @keyframes imageLoop {
+    @keyframes standardLoop {
         0% {
-            transform: translateX(-100px) translateY(0) rotate(0deg);
+            transform: translateX(-60px);
             opacity: 0;
         }
-        10% {
-            opacity: 0.3;
+        5% {
+            opacity: 0.6;
         }
-        90% {
-            opacity: 0.3;
+        95% {
+            opacity: 0.6;
         }
         100% {
-            transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(360deg);
+            transform: translateX(calc(100vw + 60px));
             opacity: 0;
         }
     }
 
-    .floating-image:nth-child(2) {
-        animation-delay: -4s;
-        top: 20%;
-    }
-
-    .floating-image:nth-child(3) {
-        animation-delay: -8s;
-        top: 40%;
-        animation-duration: 25s;
-    }
-
-    .floating-image:nth-child(4) {
-        animation-delay: -12s;
-        top: 60%;
-        animation-duration: 18s;
-    }
-
-    .floating-image:nth-child(5) {
-        animation-delay: -16s;
-        top: 80%;
-        animation-duration: 22s;
-    }
-
-    .floating-image:nth-child(6) {
-        animation-delay: -20s;
-        top: 10%;
-        animation-duration: 28s;
-    }
+    .floating-image:nth-child(1) { top: 15%; animation-delay: 0s; }
+    .floating-image:nth-child(2) { top: 35%; animation-delay: -3s; }
+    .floating-image:nth-child(3) { top: 55%; animation-delay: -6s; }
+    .floating-image:nth-child(4) { top: 75%; animation-delay: -9s; }
+    .floating-image:nth-child(5) { top: 25%; animation-delay: -12s; }
+    .floating-image:nth-child(6) { top: 45%; animation-delay: -15s; }
+    .floating-image:nth-child(7) { top: 65%; animation-delay: -18s; }
+    .floating-image:nth-child(8) { top: 85%; animation-delay: -21s; }
 
     /* Apple-style cards */
     .apple-card {
@@ -354,23 +338,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const imageContainer = document.createElement('div');
         imageContainer.className = 'image-loop-container';
         
-        // List of emoji/icon images to float
-        const images = ['📊', '📈', '📋', '⚡', '🎯', '✨'];
+        // Professional icons for business/productivity apps
+        const images = ['📊', '📈', '📋', '💼', '🎯', '⚙️', '📝', '🚀'];
         
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 8; i++) {
             const imageElement = document.createElement('div');
             imageElement.className = 'floating-image';
-            
-            // Set random vertical position
-            const topPosition = Math.random() * 80 + 10;
-            imageElement.style.top = `${topPosition}%`;
-            
-            // Use emoji as background or create a colored circle with text
-            imageElement.innerHTML = `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px;">${images[i % images.length]}</div>`;
-            
-            // Random animation delay and duration
-            imageElement.style.animationDelay = `${-i * 4}s`;
-            imageElement.style.animationDuration = `${20 + Math.random() * 10}s`;
+            imageElement.innerHTML = images[i];
             
             imageContainer.appendChild(imageElement);
         }
